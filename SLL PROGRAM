@@ -1,0 +1,93 @@
+SINGLE LINKED LIST PROGRAM
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node*next;
+};
+struct node *head=NULL;
+void insert_beg()
+{
+    struct node *nn;
+    nn=(struct node*)malloc(sizeof(struct node));
+    printf("\nenter the value\n");
+    scanf("%d",&nn->data);
+    nn->next=NULL;
+    if(head==NULL)
+    head=nn;
+    else
+    {
+       nn->next=head;
+       head=nn;
+    }
+}
+void delete_beg()
+{
+    struct node*temp;
+    if(head==NULL)
+    printf("SLL is empty\n");
+    else
+    {
+        temp=head;
+        head=temp->next;
+        temp->next=NULL;
+        free(temp);
+    }
+}
+void create()
+{
+    struct node *nn,*temp;
+    nn=(struct node*)malloc(sizeof(struct node));
+    printf("enter the value\n");
+    scanf("%d",&nn->data);
+    nn->next=NULL;
+    if(head==NULL)
+    head=nn;
+    else
+    {
+        temp=head;
+        while(temp->next!=NULL)
+        temp=temp->next;
+        temp->next=nn;
+    }
+   
+}
+void display()
+{
+    struct node *temp;
+    if(head==NULL)
+    printf("SLL is empty\n");
+    else
+    {
+        printf("elements of sll are\n");
+        temp=head;
+        while(temp!=NULL)
+        {
+            printf("%d\n",temp->data);
+            temp=temp->next;
+        }
+    }
+}
+int main()
+{
+    int ch,op;
+    do
+    {
+        printf("1.create\n2.display\n3.insert_beg\n4.delete_beg\n");
+        printf("Enter ur choice\n");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1: create();break;
+            case 2: display();break;
+            case 3: insert_beg();break;
+            case 4: delete_beg();break;
+            default:printf("enter valid choice");break;
+        }
+        printf("\n1.continue\t 0.stop\n");
+        scanf("%d",&op);
+    }
+    while(op);
+}
