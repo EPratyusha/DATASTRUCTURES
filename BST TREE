@@ -1,0 +1,109 @@
+BINARY SEARCH TREE
+
+#include <stdio.h>
+#include<stdlib.h>
+//DECLARING A NODE
+struct node
+{
+    int data;
+    struct node *left,*right;
+};
+struct node *root=NULL;
+//CREATING A NODE
+struct node *create(int data)
+{
+    struct node *nn;
+    nn=(struct node *)malloc(sizeof(struct node));
+    nn->data=data;
+    nn->left=nn->right=NULL;
+    return nn;
+}
+//INSERTING A NODE IN BST
+struct node *insert(int data,struct node*temp)
+{
+    if(temp==NULL)
+      return create(data);
+    if(temp->data>data)
+      temp->left=insert(data,temp->left);
+    else
+      temp->right=insert(data,temp->right);
+    return temp;
+}
+//INORDER
+void inorder(struct node *temp)
+{
+    if(temp!=NULL)
+    {
+        inorder(temp->left);
+        printf("%d\t",temp->data);
+        inorder(temp->right);
+    }
+}
+void preorder(struct node *temp)
+{
+    if(temp!=NULL)
+    {
+         printf("%d\t",temp->data);
+         preorder(temp->left);
+         preorder(temp->right);
+        
+    }
+}
+void postorder(struct node *temp)
+{
+    if(temp!=NULL)
+    {
+         
+         postorder(temp->left);
+         postorder(temp->right);
+         printf("%d\t",temp->data);
+        
+    }
+}
+//MAX ELEMENT IN THE ARRAY
+int max(struct node * temp)
+{
+    while(temp->right != NULL)
+      temp=temp->right;
+    return temp->data;
+}
+//MIN ELEMENT IN THE ARRAY
+int min(struct node * temp)
+{
+    while(temp->left != NULL)
+      temp=temp->left;
+    return temp->data;
+}
+int main()
+{
+    int op,ch,ele,n;
+    do
+    {
+        printf("1.insert\t 2.inorder\t 3.preorder\t 4.postorder\t 5.max\t 6.min\n");
+        scanf("%d",&op);
+        switch(op)
+        {
+            case 1:printf("enter the value\n");
+                   scanf("%d",&ele);
+                   root=insert(ele,root);
+                   break;
+            case 2:
+            inorder(root) ;break;
+            case 3:
+            preorder(root) ;break;
+            case 4:
+            postorder(root) ;break;
+            case 5:
+            n=max(root);
+            printf("max=%d\n",n);break;
+            case 6:
+            n=min(root);
+            printf("min=%d\n",n);break;
+            default: printf("INVALID CHOICE");
+        }
+        printf("\nDO YOU WANT TO CONTINUE PRESS 1 OR 0");
+        scanf("%d",&ch);
+    }while(ch);
+    return 0;
+
+}
