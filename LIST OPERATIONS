@@ -1,0 +1,178 @@
+LIST OPERATIONS
+
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *head=NULL;
+void insert_beg()
+{
+    struct node *nn;
+    nn=(struct node *)malloc(sizeof(struct node));
+    printf("\n enter the value\n");
+    scanf("%d",&nn->data);
+    nn->next=NULL;
+    if(head==NULL)
+    head=nn;
+    else
+    {
+        nn->next=head;
+        head=nn;
+    }
+}
+void insert_pos()
+{
+    int pos,count=1;
+    struct node *nn,*temp;
+    nn=(struct node *)malloc(sizeof(struct node));
+    printf("enter the VALUE\n");
+    scanf("%d",&nn->data);
+    nn->next=NULL;
+    printf("enter the position");
+    scanf("%d",&pos);
+    if(head==NULL)
+    head=nn;
+    else
+    {
+        temp=head;
+        while(count!=pos-1)
+        {
+            temp=temp->next;
+            count++;
+        }
+        nn->next=temp->next;
+        temp->next=nn;
+    }
+}
+void insert_last()
+{
+    struct node *nn,*temp;
+    nn=(struct node *)malloc(sizeof(struct node));
+    printf("enter the value");
+    scanf("%d",&nn->data);
+    nn->next=NULL;
+    if(head==NULL)
+    head=nn;
+    else
+    {
+        temp=head;
+        while(temp->next!=NULL)
+        temp=temp->next;
+    }
+    temp->next=nn;
+}
+void delete_beg()
+{
+    struct node *temp;
+    if(head==NULL)
+    printf("sll is empty");
+    else
+    {
+        temp=head;
+        head=temp->next;
+        temp->next=NULL;
+        free(temp);
+    }
+}
+void delete_pos()
+{
+    struct node *prev=NULL,*temp;
+    int count=1,pos;
+    printf("enter the position");
+    scanf("%d",&pos);
+    if(head==NULL)
+    printf("nothing to delete");
+    else
+    {
+        temp=head;
+        while(count!=pos)
+        {
+            prev=temp;
+            temp=temp->next;
+            count++;
+        }
+        prev->next=temp->next;
+        temp->next=NULL;
+        free(temp);
+    }
+    
+}
+void delete_end()
+{
+    struct node *prev,*temp;
+    if(head==NULL)
+    printf("nothing to delete");
+    else
+    {
+        temp=head;
+        while(temp->next!=NULL)
+        {
+            prev=temp;
+            temp=temp->next;
+        }
+        prev->next=NULL;
+        free(temp);
+    }
+}
+
+void create()
+{
+    struct node *nn,*temp;
+    nn=(struct node *)malloc(sizeof(struct node));
+    printf("enter the value");
+    scanf("%d",&nn->data);
+    nn->next=NULL;
+    if(head==NULL)
+    head=nn;
+    else
+    {
+        temp=head;
+        while(temp->next!=NULL)
+        temp=temp->next;
+        temp->next=nn;
+    }
+}
+void display()
+{
+    struct node *temp;
+    if(head==NULL)
+        printf("sll is empty");
+    else
+    {
+        temp=head;
+        while(temp!=NULL)
+        {
+            printf("%d\t",temp->data);
+            temp=temp->next;
+        }
+    }
+}
+int main()
+{
+    int ch,op;
+    do
+    {
+        printf("\n1.create 2.display\t 3.insert_beg\t 4.delete_beg\t 5.insert_last\t 6.insert_pos\t 7.delete_pos\t 8.delete_end\n");
+        printf("enter your choice");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:create();break;
+            case 2:display();break;
+            case 3:insert_beg();break;
+            case 4:delete_beg();break;
+            case 5:insert_last();break;
+            case 6:insert_pos();break;
+            case 7:delete_pos();break;
+            case 8:delete_end();break;
+            default:printf("\ninvalid choice\n");
+        }
+        printf("do you want to continue presss 1 or 0 ");
+        scanf("%d",&op);
+    }
+    while(op);
+    return 0;
+}
