@@ -1,0 +1,59 @@
+STACK PROGRAM
+
+#include<stdio.h>
+#define MAX 50
+int stack[MAX];
+int top=-1;
+int n,i,ch,op;
+void push()
+{
+    int ele;
+    printf("Enter value");
+    scanf("%d",&ele);
+    if(top==MAX-1)
+        printf("stack is full\n");
+    else
+        stack[++top]=ele;
+}
+void pop()  
+{
+    if(top==-1)
+        printf("empty\n");
+    else
+        printf("deleted is %d\n",stack[top--]);
+}
+void display()
+{
+    if(top==-1)
+        printf("empty\n");
+    else
+    {
+        printf("\nthe stack elements are\n");
+        for(i=top;i<=0;i--);
+        {
+            printf("%d\t",stack[i]);
+        }
+    }
+}
+void main()
+{
+    int n,top=-1,i,ch,op;
+    printf("size of elements\n");
+    scanf("%d\n",&n);
+    printf("1.push\t2.pop\t3.display\n");
+    do
+    {
+        printf("Enter choice\n");
+        scanf("%d\n",&ch);
+        switch(ch)
+        {
+            case 2:pop();break;
+            case 1:push();break;
+            case 3:display();break;
+            default:printf("exit");
+        }
+        printf("\nDo u want to continue press 1 ifnot enter 0\n");
+        scanf("%d\n",&op);
+    }
+    while(op);
+}
